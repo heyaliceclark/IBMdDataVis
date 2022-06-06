@@ -1,8 +1,8 @@
 # Import required libraries
 import pandas as pd
 import dash
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import html as html
+from dash import dcc as dcc
 from dash.dependencies import Input, Output, State
 import plotly.graph_objects as go
 import plotly.express as px
@@ -26,9 +26,7 @@ airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.
 year_list = [i for i in range(2005, 2021, 1)]
 
 """Compute graph data for creating yearly airline performance report 
-
 Function that takes airline data as input and create 5 dataframes based on the grouping condition to be used for plottling charts and grphs.
-
 Argument:
      
     df: Filtered dataframe
@@ -51,9 +49,7 @@ def compute_data_choice_1(df):
 
 
 """Compute graph data for creating yearly airline delay report
-
 This function takes in airline data and selected year as an input and performs computation for creating charts and plots.
-
 Arguments:
     df: Input airline data.
     
@@ -90,11 +86,11 @@ app.layout = html.Div(children=[
                                         # Enter your code below. Make sure you have correct formatting.
                                         dcc.Dropdown(id='input-type', 
                                                      options=[{'label': 'Yearly Airline Performance Report', 'value': 'OPT1'},
-                                                    {'label': 'Yearly Airline De;au Report', 'value': 'OPT2'}],
+                                                    {'label': 'Yearly Airline Delay Report', 'value': 'OPT2'}],
                                                      placeholder="Select a report type",
                                                      style={'width':'80%', 'padding':'3px', 'font-size': '20px', 'text-align-last' : 'center'}),                                        
-                                    # Place them next to each other using the division style
-                                    ], style={'display':'flex'}),
+                                    ], style={'display':'flex'})
+                                  ]),
                                     
                                    # Add next division 
                                    html.Div([
@@ -110,26 +106,25 @@ app.layout = html.Div(children=[
                                                      placeholder="Select a year",
                                                      style={'width':'80%', 'padding':'3px', 'font-size': '20px', 'text-align-last' : 'center'}),
                                             # Place them next to each other using the division style
-                                            ], style={'display': 'flex'}) 
-                                          ]),
+                                    ], style={'display': 'flex'}) 
+                                  ])
                                         
                                 
                                 # Add Computed graphs
                                 # REVIEW3: Observe how we add an empty division and providing an id that will be updated during callback
-                                html.Div([ ], id='plot1'),
+html.Div([ ], id='plot1'),
     
-                                html.Div([
+html.Div([
                                         html.Div([ ], id='plot2'),
                                         html.Div([ ], id='plot3')
                                 ], style={'display': 'flex'}),
                                 
                                 # TASK3: Add a division with two empty divisions inside. See above disvision for example.
                                 # Enter your code below. Make sure you have correct formatting.
-                                 html.Div([
+html.Div([
                                         html.Div([ ], id='plot4'),
                                         html.Div([ ], id='plot5')
-                                ], style={'display': 'flex'})
-                                ]                     
+                                ], style={'display': 'flex'})                
                                 
 
 # Callback function definition
